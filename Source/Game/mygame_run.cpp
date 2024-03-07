@@ -50,7 +50,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	button[2].SetTopLeft(90, 800);
 
 	window[0].LoadBitmapByString({ "Resources/window/setting/background.bmp" });
-	window[0].SetTopLeft(70, 167);
+	window[0].SetTopLeft(80, 215);
 	/*
 	for (int i = 0; i < 4; i++) {
 		window[i].SetTopLeft(182, 167);	//(0,0) ()
@@ -61,18 +61,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	if (nChar == VK_RIGHT) {
-		page_phase ++;
-	}
-	if (nChar == VK_LEFT) {
-		page_phase --;
-	}
-	if (nChar == VK_SPACE) {
-		if (call_window == false) {call_window = true;}
-		if (call_window == true) { call_window = false; }
-		
-	}
-
+	
 	
 }
 
@@ -84,7 +73,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
 	if (nFlags == VK_LBUTTON) {
-
+		IsMouseOverlap(point.x, point.y);
 	}
 	
 }
@@ -106,16 +95,13 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 }
 
 void CGameStateRun::OnShow()
-{
-	
-	
+{		
 	if (call_window) {
 		show_window();
 	}
 	else {
 		show_page();
 	}
-
 	ShowWindowCoordinate();
 	
 }
@@ -133,15 +119,15 @@ void CGameStateRun::show_page() {
 		button[2].ShowBitmap();	//back
 	}
 	if (page_phase == 2) {	//map1
-		background.SetFrameIndexOfBitmap(2);
+		// background.SetFrameIndexOfBitmap(2);
 		background.ShowBitmap();
-		window[0].ShowBitmap();
 	}
 }
 
 void CGameStateRun::show_window() {
 	if (window_phase == 0) {
 		window[0].ShowBitmap();
+		button[2].ShowBitmap();
 	}
 }
 
@@ -164,3 +150,21 @@ void CGameStateRun::ShowWindowCoordinate() {
 	CDDraw::ReleaseBackCDC();
 }
 
+
+void CGameStateRun::IsMouseOverlap(int mouse_x, int mouse_y) {
+	// playButton
+	if ((mouse_x >= button[0].GetLeft() && mouse_x <= button[0].GetLeft() + 300) && (mouse_y >= button[0].GetTop() && mouse_y <= button[0].GetTop() + 120) && page_phase == 0) {
+		background.SetFrameIndexOfBitmap(2);
+		page_phase = 2;
+	}
+	// settingButton
+	if ((mouse_x >= button[1].GetLeft() && mouse_x <= button[1].GetLeft() + 110) && (mouse_y >= button[1].GetTop() && mouse_y <= button[1].GetTop() + 110) && page_phase == 0) {
+		button[2].SetTopLeft(560, 700);
+		call_window = true;
+	}
+	// backButton at Setting Menu
+	if ((mouse_x >= button[2].GetLeft() && mouse_x <= button[2].GetLeft() + 340) && (mouse_y >= button[2].GetTop() && mouse_y <= button[2].GetTop() + 150) && call_window == true) {
+		call_window = false;
+		page_phase = 0;
+	}
+}
