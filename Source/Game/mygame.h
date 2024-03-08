@@ -89,6 +89,10 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
+		void show_page();	//show page
+		void show_window();
+		void ShowWindowCoordinate();
+		void IsMouseOverlap(int mouse_x, int mouse_y);
 	private:
 		int page_phase = 0;	//page select {home:0, menu:1, map1:2, map2:3, ...}
 		bool call_window = false;
@@ -97,9 +101,7 @@ namespace game_framework {
 		CMovingBitmap button[12];	// (home: play setting) (menu:stage1,2,3,4 back) (map:paused) {window:(settig:muic effect) (paused:end resume retry) (die:menu retry skip) (pass:continue)}
 		CMovingBitmap map_block[5];		
 		CMovingBitmap window[4];
-		void show_page();	//show page
-		void show_window();
-		void ShowWindowCoordinate();
+
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
