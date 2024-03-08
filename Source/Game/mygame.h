@@ -99,8 +99,14 @@ namespace game_framework {
 		int window_phase = 0;	//window(setting paused die pass) select
 		CMovingBitmap background;
 		CMovingBitmap button[12];	// (home: play setting) (menu:stage1,2,3,4 back) (map:paused) {window:(settig:muic effect) (paused:end resume retry) (die:menu retry skip) (pass:continue)}
-		CMovingBitmap map_block[5];		
+		CMovingBitmap map_block[5];
 		CMovingBitmap window[4];
+		CMovingBitmap map_box;
+		CMovingBitmap map_button[3];	//blue purple red
+		CMovingBitmap map_controller[5];	//yellow blue green red white
+		CMovingBitmap map_diamond[3];	//red blue white
+		CMovingBitmap map_door[2];	//fire water
+		CMovingBitmap map_pole[3];	//M1_purple,yellow
 
 	};
 
