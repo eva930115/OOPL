@@ -60,13 +60,13 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	button[2].SetTopLeft(0, 0);
 	button[3].LoadBitmapByString({ "Resources/menu/button_back.bmp" });
 	button[3].SetTopLeft(30, 830);
-	button[4].LoadBitmapByString({ "Resources/map/button_paused.bmp" });
+	button[4].LoadBitmapByString({ "Resources/map/button_paused.bmp" }, RGB(0, 255, 0));
 	button[4].SetTopLeft(1320, 10);
 	button[5].LoadBitmapByString({ "Resources/window/setting/button_music_1.bmp", "Resources/window/setting/button_music_2.bmp" });
 	button[5].SetTopLeft(0, 0);
 	button[6].LoadBitmapByString({ "Resources/window/setting/button_effec_1.bmp", "Resources/window/setting/button_effec_2.bmp" });
 	button[6].SetTopLeft(0, 0);
-	button[7].LoadBitmapByString({ "Resources/window/setting/button_end.bmp" });
+	button[7].LoadBitmapByString({ "Resources/window/setting/button_back.bmp" });
 	button[7].SetTopLeft(90, 800);
 	button[8].LoadBitmapByString({ "Resources/window/paused/button_end.bmp" });	//跟button7的差異在一個回home 一個map
 	button[8].SetTopLeft(0, 0);
@@ -93,25 +93,39 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	}
 	
 
-	map_box.LoadBitmapByString({ "Resources/object/box.bmp" });
-	map_button[0].LoadBitmapByString({ "Resources/object/button_blue_1.bmp", "Resources/object/button_blue_2.bmp" , "Resources/object/button_blue_3.bmp" });	//blue purple red
-	map_button[1].LoadBitmapByString({ "Resources/object/button_purple_1.bmp", "Resources/object/button_purple_2.bmp" , "Resources/object/button_purple_3.bmp" });
-	map_button[2].LoadBitmapByString({ "Resources/object/button_red_1.bmp", "Resources/object/button_red_2.bmp" , "Resources/object/button_red_3.bmp" });
-	map_controller[0].LoadBitmapByString({ "Resources/object/controller_yellow_1.bmp", "Resources/object/controller_yellow_2.bmp" });	//yellow blue green red white
-	map_controller[1].LoadBitmapByString({ "Resources/object/controller_blue_1.bmp", "Resources/object/controller_blue_2.bmp" });
-	map_controller[2].LoadBitmapByString({ "Resources/object/controller_green_1.bmp", "Resources/object/controller_green_2.bmp" });
-	map_controller[3].LoadBitmapByString({ "Resources/object/controller_red_1.bmp", "Resources/object/controller_red_2.bmp" });
-	map_controller[4].LoadBitmapByString({ "Resources/object/controller_white_1.bmp", "Resources/object/controller_white_2.bmp" });
-	map_diamond[0].LoadBitmapByString({"Resources/object/diamond_red.bmp"});	//red blue white
-	map_diamond[1].LoadBitmapByString({ "Resources/object/diamond_blue.bmp" });
-	map_diamond[2].LoadBitmapByString({ "Resources/object/diamond_white.bmp" });
+	map_box.LoadBitmapByString({ "Resources/object/box.bmp" }, RGB(0, 255, 0));
+	map_button[0].LoadBitmapByString({ "Resources/object/button_blue_1.bmp", "Resources/object/button_blue_2.bmp" , "Resources/object/button_blue_3.bmp" }, RGB(0, 255, 0));	//blue purple red
+	map_button[1].LoadBitmapByString({ "Resources/object/button_purple_1.bmp", "Resources/object/button_purple_2.bmp" , "Resources/object/button_purple_3.bmp" }, RGB(0, 255, 0));
+	map_button[2].LoadBitmapByString({ "Resources/object/button_red_1.bmp", "Resources/object/button_red_2.bmp" , "Resources/object/button_red_3.bmp" }, RGB(0, 255, 0));
+	map_controller[0].LoadBitmapByString({ "Resources/object/controller_yellow_1.bmp", "Resources/object/controller_yellow_2.bmp" }, RGB(0, 255, 0));	//yellow blue green red white
+	map_controller[1].LoadBitmapByString({ "Resources/object/controller_blue_1.bmp", "Resources/object/controller_blue_2.bmp" }, RGB(255, 0, 0));
+	map_controller[2].LoadBitmapByString({ "Resources/object/controller_green_1.bmp", "Resources/object/controller_green_2.bmp" }, RGB(0, 255, 0));
+	map_controller[3].LoadBitmapByString({ "Resources/object/controller_red_1.bmp", "Resources/object/controller_red_2.bmp" }, RGB(0, 255, 0));
+	map_controller[4].LoadBitmapByString({ "Resources/object/controller_white_1.bmp", "Resources/object/controller_white_2.bmp" }, RGB(0, 255, 0));
+	map_diamond[0].LoadBitmapByString({"Resources/object/diamond_red.bmp"}, RGB(0, 255, 0));	//red blue white
+	map_diamond[1].LoadBitmapByString({ "Resources/object/diamond_blue.bmp" }, RGB(0, 255, 0));
+	map_diamond[2].LoadBitmapByString({ "Resources/object/diamond_white.bmp" }, RGB(0, 255, 0));
 	map_door[0].LoadBitmapByString({ "Resources/object/door_fire_1.bmp", "Resources/object/door_fire_2.bmp" });	//fire water
 	map_door[1].LoadBitmapByString({ "Resources/object/door_water_1.bmp", "Resources/object/door_water_2.bmp" });
 	map_pole[0].LoadBitmapByString({ "Resources/object/pole_M1_yellow_1.bmp", "Resources/object/pole_M1_yellow_2.bmp" });
 	map_pole[1].LoadBitmapByString({"Resources/object/pole_M1_purple_1.bmp", "Resources/object/pole_M1_purple_2.bmp" });
 	
-	
-	
+	character[0].LoadBitmapByString({
+		"Resources/characters/watergirl_front_1.bmp", "Resources/characters/watergirl_front_2.bmp","Resources/characters/watergirl_front_3.bmp","Resources/characters/watergirl_front_4.bmp","Resources/characters/watergirl_front_5.bmp",
+		"Resources/characters/watergirl_left_1.bmp", "Resources/characters/watergirl_left_2.bmp","Resources/characters/watergirl_left_3.bmp","Resources/characters/watergirl_left_4.bmp","Resources/characters/watergirl_left_5.bmp",
+		"Resources/characters/watergirl_right_1.bmp", "Resources/characters/watergirl_right_2.bmp", "Resources/characters/watergirl_right_3.bmp", "Resources/characters/watergirl_right_4.bmp","Resources/characters/watergirl_right_5.bmp" 
+		}, RGB(0,255,0));
+	character[0].SetTopLeft(300,300);
+	character[0].SetAnimation(1000, false);
+
+	character[1].LoadBitmapByString({
+		"Resources/characters/fireman_front_1.bmp", "Resources/characters/fireman_front_2.bmp","Resources/characters/fireman_front_3.bmp","Resources/characters/fireman_front_4.bmp","Resources/characters/fireman_front_5.bmp",
+		"Resources/characters/fireman_left_1.bmp", "Resources/characters/fireman_left_2.bmp","Resources/characters/fireman_left_3.bmp","Resources/characters/fireman_left_4.bmp","Resources/characters/fireman_left_5.bmp",
+		"Resources/characters/fireman_right_1.bmp", "Resources/characters/fireman_right_2.bmp", "Resources/characters/fireman_right_3.bmp", "Resources/characters/fireman_right_4.bmp","Resources/characters/fireman_right_5.bmp"
+		}, RGB(0, 255, 0));
+	character[1].SetTopLeft(100, 100);
+	character[1].SetAnimation(1000, false);
+
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -163,10 +177,12 @@ void CGameStateRun::OnShow()
 
 void CGameStateRun::show_page() {
 	if (page_phase == 0) {	//home page
+		
 		background.SetFrameIndexOfBitmap(0);
 		background.ShowBitmap();
 		button[0].ShowBitmap();	//button_play
 		button[1].ShowBitmap();	//button_setting
+		
 	}
 	if (page_phase == 1) {	//menu
 		background.SetFrameIndexOfBitmap(1);
@@ -202,7 +218,7 @@ void CGameStateRun::show_page() {
 		map_button[0].ShowBitmap();
 		map_button[0].SetTopLeft(1020, 360);
 		map_button[0].ShowBitmap();
-		map_box.SetTopLeft(725, 255);
+		map_box.SetTopLeft(725, 265);
 		map_box.ShowBitmap();
 		map_door[0].SetTopLeft(1130, 120);
 		map_door[0].ShowBitmap();

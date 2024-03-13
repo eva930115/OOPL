@@ -107,7 +107,8 @@ namespace game_framework {
 		CMovingBitmap map_diamond[3];	//red blue white
 		CMovingBitmap map_door[2];	//fire water
 		CMovingBitmap map_pole[3];	//M1_purple,yellow
-
+		CMovingBitmap character[2];	//fireman watergirl
+		
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
