@@ -29,7 +29,32 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	
+	if (fireman.IsRightButtonClick)
+		fireman.moveRight();
+	if (fireman.IsLeftButtonClick)
+		fireman.moveLeft();
+	if (fireman.IsUpButtonClick && fireman.IsRightButtonClick) {
+		if (fireman.jumpHeight <= 3) {
+			fireman.moveRightJumpUp();
+			fireman.jumpHeight++;
+		}
+		else if (fireman.jumpHeight >= 4 && fireman.jumpHeight <= 7) {
+			fireman.moveRightJumpDown();
+			fireman.jumpHeight++;
+		}
+		Sleep(25);
+	}
+	if (fireman.IsUpButtonClick && fireman.IsLeftButtonClick) {
+		if (fireman.jumpHeight <= 3) {
+			fireman.moveLeftJumpUp();
+			fireman.jumpHeight++;
+		}
+		else if (fireman.jumpHeight >= 4 && fireman.jumpHeight <= 7) {
+			fireman.moveLeftJumpDown();
+			fireman.jumpHeight++;
+		}
+		Sleep(25);
+	}	
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -109,34 +134,44 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	map_door[1].LoadBitmapByString({ "Resources/object/door_water_1.bmp", "Resources/object/door_water_2.bmp" });
 	map_pole[0].LoadBitmapByString({ "Resources/object/pole_M1_yellow_1.bmp", "Resources/object/pole_M1_yellow_2.bmp" });
 	map_pole[1].LoadBitmapByString({"Resources/object/pole_M1_purple_1.bmp", "Resources/object/pole_M1_purple_2.bmp" });
-	
-	character[0].LoadBitmapByString({
-		"Resources/characters/watergirl_front_1.bmp", "Resources/characters/watergirl_front_2.bmp","Resources/characters/watergirl_front_3.bmp","Resources/characters/watergirl_front_4.bmp","Resources/characters/watergirl_front_5.bmp",
-		"Resources/characters/watergirl_left_1.bmp", "Resources/characters/watergirl_left_2.bmp","Resources/characters/watergirl_left_3.bmp","Resources/characters/watergirl_left_4.bmp","Resources/characters/watergirl_left_5.bmp",
-		"Resources/characters/watergirl_right_1.bmp", "Resources/characters/watergirl_right_2.bmp", "Resources/characters/watergirl_right_3.bmp", "Resources/characters/watergirl_right_4.bmp","Resources/characters/watergirl_right_5.bmp" 
-		}, RGB(0,255,0));
-	character[0].SetTopLeft(300,300);
-	character[0].SetAnimation(1000, false);
 
-	character[1].LoadBitmapByString({
-		"Resources/characters/fireman_front_1.bmp", "Resources/characters/fireman_front_2.bmp","Resources/characters/fireman_front_3.bmp","Resources/characters/fireman_front_4.bmp","Resources/characters/fireman_front_5.bmp",
-		"Resources/characters/fireman_left_1.bmp", "Resources/characters/fireman_left_2.bmp","Resources/characters/fireman_left_3.bmp","Resources/characters/fireman_left_4.bmp","Resources/characters/fireman_left_5.bmp",
-		"Resources/characters/fireman_right_1.bmp", "Resources/characters/fireman_right_2.bmp", "Resources/characters/fireman_right_3.bmp", "Resources/characters/fireman_right_4.bmp","Resources/characters/fireman_right_5.bmp"
-		}, RGB(0, 255, 0));
-	character[1].SetTopLeft(100, 100);
-	character[1].SetAnimation(1000, false);
+	fireman.character.LoadBitmapByString({"Resources/characters/fireman_front_1.bmp"}, RGB(0, 255, 0));
+	fireman.character.SetTopLeft(56, 905);
 
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	
+	switch (nChar)
+	{
+	case VK_RIGHT:
+		fireman.IsRightButtonClick = true;
+		break;
+	case VK_LEFT:
+		fireman.IsLeftButtonClick = true;
+		break;
+	case VK_UP:
+		fireman.IsUpButtonClick = true;
+		break;
+	}
 	
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	
+	switch (nChar)
+	{
+	case VK_RIGHT:
+		fireman.IsRightButtonClick = false;
+		break;
+	case VK_LEFT:
+		fireman.IsLeftButtonClick = false;
+		break;
+	case VK_UP:
+		fireman.IsUpButtonClick = false;
+		fireman.jumpHeight = 0;
+		break;
+	}
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
@@ -224,6 +259,7 @@ void CGameStateRun::show_page() {
 		map_door[0].ShowBitmap();
 		map_door[1].SetTopLeft(1240, 120);
 		map_door[1].ShowBitmap();
+		fireman.character.ShowBitmap();
 	}
 }
 
