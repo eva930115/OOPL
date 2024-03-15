@@ -1,6 +1,6 @@
 # ObjectOrientedProgrammingLab
 ## 更新日誌
-2024/03/04 initial project & add part of image
+2024/03/04 initial project & add part of image  
 2024/03/14 add Right/Left move and initial Jump move   
 
 原網頁版本 
