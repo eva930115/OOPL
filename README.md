@@ -1,8 +1,11 @@
 # ObjectOrientedProgrammingLab
 ## 更新日誌
 2024/03/04 initial project & add part of image  
-2024/03/14 add Right/Left move and initial Jump move   
+2024/03/14 add "Right/Left move and initial Jump move"   
+2024/03/15 add "class of Fireman, Watergirl and Character"  
+2024/03/17 add "use text file to generate map"
 
+## Resources
 原網頁版本 
 url : https://i-gamer.net/site/16086.html
 
@@ -29,3 +32,6 @@ url : https://learn.microsoft.com/zh-tw/windows/win32/inputdev/virtual-key-codes
 |Week16   |Demo| [ ] |Demo| [ ] |
 |Week17   |報告製作| [ ] |報告製作| [ ] |
 
+### Make the Map.txt 更改地圖文字檔
+資料夾中有 mapSample.txt 為 40 * 29 的地圖基礎外框  
+再依要放的物件去更改編號
