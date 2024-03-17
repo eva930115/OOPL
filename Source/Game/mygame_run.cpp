@@ -28,33 +28,10 @@ void CGameStateRun::OnBeginState()
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
-{
-	if (fireman.IsRightButtonClick)
-		fireman.moveRight();
-	if (fireman.IsLeftButtonClick)
-		fireman.moveLeft();
-	if (fireman.IsUpButtonClick && fireman.IsRightButtonClick) {
-		if (fireman.jumpHeight <= 3) {
-			fireman.moveRightJumpUp();
-			fireman.jumpHeight++;
-		}
-		else if (fireman.jumpHeight >= 4 && fireman.jumpHeight <= 7) {
-			fireman.moveRightJumpDown();
-			fireman.jumpHeight++;
-		}
-		Sleep(25);
-	}
-	if (fireman.IsUpButtonClick && fireman.IsLeftButtonClick) {
-		if (fireman.jumpHeight <= 3) {
-			fireman.moveLeftJumpUp();
-			fireman.jumpHeight++;
-		}
-		else if (fireman.jumpHeight >= 4 && fireman.jumpHeight <= 7) {
-			fireman.moveLeftJumpDown();
-			fireman.jumpHeight++;
-		}
-		Sleep(25);
-	}	
+{	
+	fireman.IsMoving();
+	watergirl.IsMoving();
+
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -137,41 +114,22 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 	fireman.character.LoadBitmapByString({"Resources/characters/fireman_front_1.bmp"}, RGB(0, 255, 0));
 	fireman.character.SetTopLeft(56, 905);
+	watergirl.character.LoadBitmapByString({ "Resources/characters/watergirl_front_1.bmp" }, RGB(0, 255, 0));
+	watergirl.character.SetTopLeft(56, 755);
 
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	switch (nChar)
-	{
-	case VK_RIGHT:
-		fireman.IsRightButtonClick = true;
-		break;
-	case VK_LEFT:
-		fireman.IsLeftButtonClick = true;
-		break;
-	case VK_UP:
-		fireman.IsUpButtonClick = true;
-		break;
-	}
+	fireman.IsButtonDown(nChar);
+	watergirl.IsButtonDown(nChar);
 	
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	switch (nChar)
-	{
-	case VK_RIGHT:
-		fireman.IsRightButtonClick = false;
-		break;
-	case VK_LEFT:
-		fireman.IsLeftButtonClick = false;
-		break;
-	case VK_UP:
-		fireman.IsUpButtonClick = false;
-		fireman.jumpHeight = 0;
-		break;
-	}
+	fireman.IsButtonUp(nChar);
+	watergirl.IsButtonUp(nChar);
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
@@ -260,6 +218,7 @@ void CGameStateRun::show_page() {
 		map_door[1].SetTopLeft(1240, 120);
 		map_door[1].ShowBitmap();
 		fireman.character.ShowBitmap();
+		watergirl.character.ShowBitmap();
 	}
 }
 

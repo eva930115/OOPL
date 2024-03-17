@@ -37,7 +37,8 @@
  *      2. Replace the demonstration of animation as a new bouncing ball.
  *      3. Use ShowInitProgress(percent) to display loading progress.
 */
-#include "../Game/myCharacter.h"
+#include "../Game/fireman.h"
+#include "../Game/watergirl.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -107,7 +108,9 @@ namespace game_framework {
 		CMovingBitmap map_diamond[3];	//red blue white
 		CMovingBitmap map_door[2];	//fire water
 		CMovingBitmap map_pole[3];	//M1_purple,yellow
-		Character fireman;
+		
+		Fireman fireman;
+		Watergirl watergirl;
 		
 	};
 

@@ -8,10 +8,10 @@ class Character {
 public:
 	game_framework::CMovingBitmap character;
 	int jumpHeight = 0;
-	bool IsRightButtonClick = false;
-	bool IsLeftButtonClick = false;
-	bool IsUpButtonClick = false;
 
+	virtual void IsMoving() = 0;
+	virtual void IsButtonUp(UINT) = 0;
+	virtual void IsButtonDown(UINT) = 0;
 	void moveRight();
 	void moveLeft();
 	void moveRightJumpUp();
