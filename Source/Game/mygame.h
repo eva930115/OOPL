@@ -39,6 +39,7 @@
 */
 #include "../Game/fireman.h"
 #include "../Game/watergirl.h"
+#include "../Game/myMap.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -108,9 +109,10 @@ namespace game_framework {
 		CMovingBitmap map_diamond[3];	//red blue white
 		CMovingBitmap map_door[2];	//fire water
 		CMovingBitmap map_pole[3];	//M1_purple,yellow
-		
+
 		Fireman fireman;
 		Watergirl watergirl;
+		Map map;
 		
 	};
 

@@ -113,10 +113,11 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	map_pole[1].LoadBitmapByString({"Resources/object/pole_M1_purple_1.bmp", "Resources/object/pole_M1_purple_2.bmp" });
 
 	fireman.character.LoadBitmapByString({"Resources/characters/fireman_front_1.bmp"}, RGB(0, 255, 0));
-	fireman.character.SetTopLeft(56, 905);
+	fireman.character.SetTopLeft(38, 877);
 	watergirl.character.LoadBitmapByString({ "Resources/characters/watergirl_front_1.bmp" }, RGB(0, 255, 0));
-	watergirl.character.SetTopLeft(56, 755);
+	watergirl.character.SetTopLeft(38, 737);
 
+	map.generateMap1();
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -165,23 +166,23 @@ void CGameStateRun::OnShow()
 		show_page();
 	}
 	ShowWindowCoordinate();
-	
 }
 
 void CGameStateRun::show_page() {
 	if (page_phase == 0) {	//home page
-		
+
 		background.SetFrameIndexOfBitmap(0);
 		background.ShowBitmap();
 		button[0].ShowBitmap();	//button_play
 		button[1].ShowBitmap();	//button_setting
-		
+
 	}
 	if (page_phase == 1) {	//menu
 		background.SetFrameIndexOfBitmap(1);
 		background.ShowBitmap();
 		button[3].ShowBitmap();	//back
 	}
+	/*
 	if (page_phase == 2) {	//map1
 		// background.SetFrameIndexOfBitmap(2);
 		//這邊你先當我在對位子，之後地圖(block)再改生成方法
@@ -217,6 +218,10 @@ void CGameStateRun::show_page() {
 		map_door[0].ShowBitmap();
 		map_door[1].SetTopLeft(1240, 120);
 		map_door[1].ShowBitmap();
+		
+	}*/
+	if (page_phase == 2) {
+		map.showMap1();
 		fireman.character.ShowBitmap();
 		watergirl.character.ShowBitmap();
 	}
