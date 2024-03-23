@@ -7,15 +7,17 @@
 
 class Object {
 public:
-	int object[29][40];
-
-	game_framework::CMovingBitmap objectResource1[29][40];
-	game_framework::CMovingBitmap objectResource2[29][40];
-	game_framework::CMovingBitmap objectResource4[29][40];
 
 
-	void generateObject();
-	void showObject(int map_stage);
+	virtual void generateObject() =0;
+	virtual void showObject(int map_stage) = 0;
+
+
+	bool isOverlap(game_framework::CMovingBitmap character, game_framework::CMovingBitmap object) {
+		return  game_framework::CMovingBitmap::IsOverlap(character, object);
+	}
+
+	
 
 };
 #endif // !MYOBJECT_H

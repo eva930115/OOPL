@@ -42,7 +42,13 @@
 #include "../Game/myMap.h"
 #include "../Game/myButton.h"
 #include "../Game/myScene.h"
-#include "../Game/myObject.h"
+#include "../Game/mapButton.h"
+#include "../Game/mapController.h"
+#include "../Game/mapPole.h"
+#include "../Game/mapBox.h"
+#include "../Game/mapDoor.h"
+#include "../Game/mapDiamond.h"
+
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -112,7 +118,12 @@ namespace game_framework {
 		Map map;
 		Button button;
 		Scene scene;
-		Object object;
+		MapButton mapButton;
+		MapController mapController;
+		MapPole mapPole;
+		MapBox mapBox;
+		MapDoor mapDoor;
+		MapDiamond mapDiamond;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

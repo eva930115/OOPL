@@ -54,25 +54,6 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	*/
 	button.loadButton();
 	
-	/*
-	map_box.LoadBitmapByString({ "Resources/object/box.bmp" }, RGB(0, 255, 0));
-	map_button[0].LoadBitmapByString({ "Resources/object/button_blue_1.bmp", "Resources/object/button_blue_2.bmp" , "Resources/object/button_blue_3.bmp" }, RGB(0, 255, 0));	//blue purple red
-	map_button[1].LoadBitmapByString({ "Resources/object/button_purple_1.bmp", "Resources/object/button_purple_2.bmp" , "Resources/object/button_purple_3.bmp" }, RGB(0, 255, 0));
-	map_button[2].LoadBitmapByString({ "Resources/object/button_red_1.bmp", "Resources/object/button_red_2.bmp" , "Resources/object/button_red_3.bmp" }, RGB(0, 255, 0));
-	map_controller[0].LoadBitmapByString({ "Resources/object/controller_yellow_1.bmp", "Resources/object/controller_yellow_2.bmp" }, RGB(0, 255, 0));	//yellow blue green red white
-	map_controller[1].LoadBitmapByString({ "Resources/object/controller_blue_1.bmp", "Resources/object/controller_blue_2.bmp" }, RGB(255, 0, 0));
-	map_controller[2].LoadBitmapByString({ "Resources/object/controller_green_1.bmp", "Resources/object/controller_green_2.bmp" }, RGB(0, 255, 0));
-	map_controller[3].LoadBitmapByString({ "Resources/object/controller_red_1.bmp", "Resources/object/controller_red_2.bmp" }, RGB(0, 255, 0));
-	map_controller[4].LoadBitmapByString({ "Resources/object/controller_white_1.bmp", "Resources/object/controller_white_2.bmp" }, RGB(0, 255, 0));
-	map_diamond[0].LoadBitmapByString({"Resources/object/diamond_red.bmp"}, RGB(0, 255, 0));	//red blue white
-	map_diamond[1].LoadBitmapByString({ "Resources/object/diamond_blue.bmp" }, RGB(0, 255, 0));
-	map_diamond[2].LoadBitmapByString({ "Resources/object/diamond_white.bmp" }, RGB(0, 255, 0));
-	map_door[0].LoadBitmapByString({ "Resources/object/door_fire_1.bmp", "Resources/object/door_fire_2.bmp" });	//fire water
-	map_door[1].LoadBitmapByString({ "Resources/object/door_water_1.bmp", "Resources/object/door_water_2.bmp" });
-	map_pole[0].LoadBitmapByString({ "Resources/object/pole_M1_yellow_1.bmp", "Resources/object/pole_M1_yellow_2.bmp" });
-	map_pole[1].LoadBitmapByString({"Resources/object/pole_M1_purple_1.bmp", "Resources/object/pole_M1_purple_2.bmp" });
-	*/
-	object.generateObject();
 
 	fireman.character.LoadBitmapByString({"Resources/characters/fireman_front_1.bmp"}, RGB(0, 255, 0));
 	fireman.character.SetTopLeft(38, 877);
@@ -80,6 +61,12 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	watergirl.character.SetTopLeft(38, 737);
 
 	map.generateMap();
+	mapButton.generateObject();
+	mapController.generateObject();
+	mapPole.generateObject();
+	mapBox.generateObject();
+	mapDoor.generateObject();
+	mapDiamond.generateObject();
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -129,7 +116,12 @@ void CGameStateRun::OnShow()
 	//Map1
 	if (page_phase == 6) {
 		map.showMap(page_phase - 5);
-		object.showObject(page_phase - 5);
+		mapButton.showObject(page_phase - 5);
+		mapController.showObject(page_phase - 5);
+		mapPole.showObject(page_phase - 5);
+		mapBox.showObject(page_phase - 5);
+		mapDoor.showObject(page_phase - 5);
+		mapDiamond.showObject(page_phase - 5);
 
 		fireman.character.ShowBitmap();		//(38, 877)
 		watergirl.character.ShowBitmap();	//(38, 737)
@@ -138,8 +130,6 @@ void CGameStateRun::OnShow()
 	//Map2
 	if (page_phase == 7) {
 		map.showMap(page_phase - 5);
-		object.showObject(page_phase - 5);
-
 		fireman.character.ShowBitmap();		//(1200, 70)
 		watergirl.character.ShowBitmap();	//(70, 460)
 	}
@@ -147,8 +137,6 @@ void CGameStateRun::OnShow()
 	//Map3
 	if (page_phase == 8) {
 		map.showMap(page_phase - 5);
-		//object.showObject(page_phase - 5);
-
 		fireman.character.ShowBitmap();		//(1020, 745)
 		watergirl.character.ShowBitmap();	//(905, 745)
 	}
@@ -156,8 +144,6 @@ void CGameStateRun::OnShow()
 	//Map4
 	if (page_phase == 9) {
 		map.showMap(page_phase - 5);
-		object.showObject(page_phase - 5);
-
 		fireman.character.ShowBitmap();		//(50, 875)
 		watergirl.character.ShowBitmap();	//(1285, 875)
 	}
@@ -165,16 +151,16 @@ void CGameStateRun::OnShow()
 	//Map5
 	if (page_phase == 10) {
 		map.showMap(page_phase - 5);
-		//object.showObject(page_phase - 5);
-
 		fireman.character.ShowBitmap();		//(130, 875)
 		watergirl.character.ShowBitmap();	//(1140, 41)
 	}
 	
-	button.showButton(page_phase);
-	//map.generateMap(page_phase - 5);	//6~10
-	
+
 	ShowWindowCoordinate();
+	button.showButton(page_phase);
+	
+	
+	
 }
 
 
@@ -200,94 +186,74 @@ void CGameStateRun::ShowWindowCoordinate() {
 
 
 void CGameStateRun::IsMouseOverlap(int mouse_x, int mouse_y) {
-
-/*
-// playButton at Home Page
-	if ((mouse_x >= button[0].GetLeft() && mouse_x <= button[0].GetLeft() + 300) && (mouse_y >= button[0].GetTop() && mouse_y <= button[0].GetTop() + 120) && page_phase == 0) {
-		background.SetFrameIndexOfBitmap(2);
+	
+	//playButton at Home
+	if (button.ifOverlap(0, CPoint(mouse_x, mouse_y)) && page_phase == 0) {
+		page_phase = 6;
+	}
+	//settingButton at Home
+	if (button.ifOverlap(1, CPoint(mouse_x, mouse_y)) && page_phase == 0) {
 		page_phase = 2;
 	}
-	// settingButton at Home Page
-	if ((mouse_x >= button[1].GetLeft() && mouse_x <= button[1].GetLeft() + 110) && (mouse_y >= button[1].GetTop() && mouse_y <= button[1].GetTop() + 110) && page_phase == 0) {
-		button[7].SetTopLeft(560, 700);
-		window_phase = 0;
-		call_window = true;
-	}
+	
 
-	// backButton at Stage Menu
-	if ((mouse_x >= button[3].GetLeft() && mouse_x <= button[3].GetLeft() + 340) && (mouse_y >= button[3].GetTop() && mouse_y <= button[3].GetTop() + 150) && page_phase == 1) {
-		background.SetFrameIndexOfBitmap(0);
+
+	//stageButton at Menu
+	for (int i = 2; i < 7; i++) {
+		if (button.ifOverlap(i, CPoint(mouse_x, mouse_y)) && page_phase == 1) {
+			page_phase = i+4;
+		}
+	}
+	//backButton at Menu
+	if (button.ifOverlap(7, CPoint(mouse_x, mouse_y)) && page_phase == 1) {
 		page_phase = 0;
 	}
-
-	// backButton at Setting Menu
-	if ((mouse_x >= button[7].GetLeft() && mouse_x <= button[7].GetLeft() + 340) && (mouse_y >= button[7].GetTop() && mouse_y <= button[7].GetTop() + 150) && call_window == true && window_phase == 0) {
-		call_window = false;
-		page_phase = 0;
+	//pausedButton at Map
+	if (button.ifOverlap(8, CPoint(mouse_x, mouse_y)) && page_phase >= 6) {
+		page_phase = 3;
 	}
-	// settingButton at Map
-	if ((mouse_x >= button[4].GetLeft() && mouse_x <= button[4].GetLeft() + 35) && (mouse_y >= button[4].GetTop() && mouse_y <= button[4].GetTop() + 40) && page_phase >= 2) {
-		button[8].SetTopLeft(290,560);		//end
-		button[9].SetTopLeft(820,560);		//resume
-		button[10].SetTopLeft(560,690);	//retry
-		window_phase = 1;
-		call_window = true;
+	
+	if (button.ifOverlap(9, CPoint(mouse_x, mouse_y)) && page_phase == 2) {
+		//music on/off
 	}
-
-	// backButton at Paused Menu
-	if ((mouse_x >= button[8].GetLeft() && mouse_x <= button[8].GetLeft() + 300) && (mouse_y >= button[8].GetTop() && mouse_y <= button[8].GetTop() + 125) && call_window == true && window_phase == 1) {
-		call_window = false;
-		page_phase = 1;		//menu
+	if (button.ifOverlap(10, CPoint(mouse_x, mouse_y)) && page_phase == 2) {
+		//effect on/of
 	}
-
-	// resumeButton at Paused Menu
-	if ((mouse_x >= button[9].GetLeft() && mouse_x <= button[9].GetLeft() + 300) && (mouse_y >= button[8].GetTop() && mouse_y <= button[8].GetTop() + 125) && call_window == true && window_phase == 1) {
-		call_window = false;
-		page_phase = 2;		//map1 (可能要改 或偵測回哪張地圖
+	//backButton at setting
+	if (button.ifOverlap(11, CPoint(mouse_x, mouse_y)) && page_phase == 2) {
+		page_phase = 1;
 	}
-
-	// skipButton at Paused Menu  (retry)
-	if ((mouse_x >= button[10].GetLeft() && mouse_x <= button[10].GetLeft() + 300) && (mouse_y >= button[10].GetTop() && mouse_y <= button[10].GetTop() + 125) && call_window == true && window_phase == 1) {
-		call_window = false;
-		page_phase = 1;		//menu (將retry換成skip測試
+	//at paused
+	if (button.ifOverlap(12, CPoint(mouse_x, mouse_y)) && page_phase == 3) {
+		//end
+		page_phase = 1;
 	}
-
-	// musicButton at Setting Menu
-	if ((mouse_x >= button[5].GetLeft() && mouse_x <= button[5].GetLeft() + 145) && (mouse_y >= button[5].GetTop() && mouse_y <= button[5].GetTop() + 110) && call_window == true && window_phase == 0) {
-		//button[5].SetFrameIndexOfBitmap(0);
-		button[5].SetFrameIndexOfBitmap(1);
-
+	if (button.ifOverlap(13, CPoint(mouse_x, mouse_y)) && page_phase == 3) {
+		//resume
 	}
-
-	// effectButton at Setting Menu
-	if ((mouse_x >= button[6].GetLeft() && mouse_x <= button[6].GetLeft() + 110) && (mouse_y >= button[6].GetTop() && mouse_y <= button[6].GetTop() + 125) && call_window == true && window_phase == 0) {
-		//button[6].SetFrameIndexOfBitmap(0);
-		button[6].SetFrameIndexOfBitmap(1);
-
+	if (button.ifOverlap(14, CPoint(mouse_x, mouse_y)) && page_phase == 3) {
+		//skip
+	}
+	//at die
+	if (button.ifOverlap(15, CPoint(mouse_x, mouse_y)) && page_phase == 4) {
+		//menu
+		page_phase = 1;
+	}
+	if (button.ifOverlap(16, CPoint(mouse_x, mouse_y)) && page_phase == 4) {
+		//retry
+		page_phase = 1;
+	}
+	if (button.ifOverlap(17, CPoint(mouse_x, mouse_y)) && page_phase == 4) {
+		//skip
+		page_phase = 1;
+	}
+	//continueButton at pass
+	if (button.ifOverlap(18, CPoint(mouse_x, mouse_y)) && page_phase == 5) {
+		page_phase = 1;
 	}
 
-	// stageButton at Stage Menu
-	if ((mouse_x >= button[2].GetLeft() && mouse_x <= button[2].GetLeft() + 130) && (mouse_y >= button[2].GetTop() && mouse_y <= button[2].GetTop() + 140) && page_phase == 1) {
-		if (mouse_y >= 830 && mouse_y <= 1000) {
-			page_phase = 2;		//map1
-		}
-		if (mouse_y >= 630 && mouse_y <= 820) {
-			page_phase = 3;		//map2
-		}
-		if (mouse_y >= 430 && mouse_y <= 620) {
-			page_phase = 4;		//map3
-		}
-		if (mouse_y >= 230 && mouse_y <= 420) {
-			page_phase = 5;		//map4
-		}
-		if (mouse_y >= 30 && mouse_y <= 220) {
-			page_phase = 6;		//map5
-		}
-		background.SetFrameIndexOfBitmap(1);	//menu
-
-	}
-*/
 }
+
 
 void CGameStateRun::TestOverlap(int mouse_x, int mouse_y) {
 	if (mouse_x <= 400) {
