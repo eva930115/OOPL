@@ -6,4 +6,3 @@ void Object::generateObject() {}
 
 void Object::showObject(int map_stage) {}
 
-

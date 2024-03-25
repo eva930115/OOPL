@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../Game/myButton.h"
 
+
 void Button::loadButton() {
 	/*
 	home: (0)play  (1)setting
@@ -16,7 +17,7 @@ void Button::loadButton() {
 	button[0].LoadBitmapByString({ "Resources/home_page/button_play.bmp" });
 	button[0].SetTopLeft(553, 530);		//playButton at Home
 	button[1].LoadBitmapByString({ "Resources/home_page/button_setting.bmp" });
-	button[1].SetTopLeft(200, 200);		//settingButton at Home  100, 890
+	button[1].SetTopLeft(100, 890);		//settingButton at Home  100, 890
 	button[2].LoadBitmapByString({ "Resources/menu/stage_gray.bmp", "Resources/menu/stage_green.bmp", "Resources/menu/stage_orange.bmp", "Resources/menu/stage_purple.bmp" });
 	button[2].SetTopLeft(600, 830);		//stage1
 	button[3].LoadBitmapByString({ "Resources/menu/stage_gray.bmp", "Resources/menu/stage_green.bmp", "Resources/menu/stage_orange.bmp", "Resources/menu/stage_purple.bmp" });
@@ -104,10 +105,3 @@ void Button::showButton(int page_phase) {
 	}
 
 }
-
-
-/*
-bool Button::isClick(int num, int mouse_x, int mouse_y) {
-	return false;
-}
-*/

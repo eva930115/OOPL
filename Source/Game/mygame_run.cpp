@@ -85,8 +85,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
 	if (nFlags == VK_LBUTTON) {
-		TestOverlap(point.x, point.y);
-		//IsMouseOverlap(point.x, point.y);
+		IsMouseOverlap(point.x, point.y);
 		
 	}
 	
@@ -125,6 +124,14 @@ void CGameStateRun::OnShow()
 
 		fireman.character.ShowBitmap();		//(38, 877)
 		watergirl.character.ShowBitmap();	//(38, 737)
+
+		
+		if (CMovingBitmap::IsOverlap(mapButton.mapButton[0], fireman.character)) {	//test isoverlap
+			mapButton.mapButton[0].SetFrameIndexOfBitmap(1);
+		}
+		else mapButton.mapButton[0].SetFrameIndexOfBitmap(0);
+		
+
 	}
 
 	//Map2
@@ -197,7 +204,7 @@ void CGameStateRun::IsMouseOverlap(int mouse_x, int mouse_y) {
 	}
 	
 
-
+	
 	//stageButton at Menu
 	for (int i = 2; i < 7; i++) {
 		if (button.ifOverlap(i, CPoint(mouse_x, mouse_y)) && page_phase == 1) {
@@ -252,14 +259,4 @@ void CGameStateRun::IsMouseOverlap(int mouse_x, int mouse_y) {
 		page_phase = 1;
 	}
 
-}
-
-
-void CGameStateRun::TestOverlap(int mouse_x, int mouse_y) {
-	if (mouse_x <= 400) {
-		page_phase--;
-	}
-	if (mouse_x >= 400) {
-		page_phase++;
-	}
 }
