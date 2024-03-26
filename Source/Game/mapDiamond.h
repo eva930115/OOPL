@@ -6,7 +6,7 @@
 
 class MapDiamond : public Object {
 public:
-	game_framework::CMovingBitmap mapDiamond[6];
+	game_framework::CMovingBitmap mapDiamond[7];
 
 	void generateObject();
 	void showObject(int map_stage);

@@ -48,7 +48,7 @@
 #include "../Game/mapBox.h"
 #include "../Game/mapDoor.h"
 #include "../Game/mapDiamond.h"
-
+#include "../Game/mapPool.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -124,6 +124,7 @@ namespace game_framework {
 		MapBox mapBox;
 		MapDoor mapDoor;
 		MapDiamond mapDiamond;
+		MapPool mapPool;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
