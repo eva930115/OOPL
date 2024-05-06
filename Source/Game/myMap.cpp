@@ -122,6 +122,17 @@ void Map::showMap(int map_stage) {
 	}
 }
 
+std::string Map::getPlaceName(int x, int y) {
+	return this->mapResource1[y][x].GetImageFileName();
+}
+
+int Map::getPlace_X(int x, int y) {
+	return this->mapResource1[y][x].GetLeft();
+}
+
+int Map::getPlace_Y(int x, int y) {
+	return this->mapResource1[y][x].GetTop();
+}
 
 /*
 

@@ -42,13 +42,7 @@
 #include "../Game/myMap.h"
 #include "../Game/myButton.h"
 #include "../Game/myScene.h"
-#include "../Game/mapButton.h"
-#include "../Game/mapController.h"
-#include "../Game/mapPole.h"
-#include "../Game/mapBox.h"
-#include "../Game/mapDoor.h"
-#include "../Game/mapDiamond.h"
-
+#include "../Game/myObject.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -103,27 +97,36 @@ namespace game_framework {
 		void ShowWindowCoordinate();
 		void IsMouseOverlap(int mouse_x, int mouse_y);
 		void TestOverlap(int mouse_x, int mouse_y);
+		void movingPole(int page, int index);
+		void movingPolefromButton(int page, CMovingBitmap &pole);
+		void isControllerOverlap(int page, CMovingBitmap &character);
+		void isButtonOverlap(int page, CMovingBitmap& character);
+		void isPoolOverlap(int page, CMovingBitmap& character ,CMovingBitmap &pool);
+		void isDoorOverlap(int page);
+		void isBoxOverlap(int page, CMovingBitmap& character);
+		void isDiamondOverlap(int page);
+		void runOverlap(int page);
+		void resetLevel(int page);
 	private:
-		int page_phase = 0;	//page select {home:0, menu:1, map1:2, map2:3, ...}
-		/*
-		CMovingBitmap map_box;
-		CMovingBitmap map_button[3];	//blue purple red
-		CMovingBitmap map_controller[5];	//yellow blue green red white
-		CMovingBitmap map_diamond[3];	//red blue white
-		CMovingBitmap map_door[2];	//fire water
-		CMovingBitmap map_pole[3];	//M1_purple,yellow
-		*/
+		int page_phase = 0;		 //page select {home:0, menu:1, map1:2, map2:3, ...}
+		int controllerMode = 0; // 0: close 1: up 2: down
+		int buttonMode[3] = {0, 0, 0}; // 0: close 1: up 2: down
+		int last_stage = 1;
+		bool musicPlay = true;
+		bool effectPlay = true;
 		Fireman fireman;
 		Watergirl watergirl;
 		Map map;
 		Button button;
 		Scene scene;
-		MapButton mapButton;
-		MapController mapController;
-		MapPole mapPole;
-		MapBox mapBox;
-		MapDoor mapDoor;
-		MapDiamond mapDiamond;
+		Object::MapButton mapButton;
+		Object::MapController mapController;
+		Object::MapPole mapPole;
+		Object::MapBox mapBox;
+		Object::MapDoor mapDoor;
+		Object::MapDiamond mapDiamond;
+		Object::MapPool mapPool;
+		Object::MapFan mapFan;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

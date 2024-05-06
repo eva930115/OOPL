@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "../Game/myButton.h"
 
-
 void Button::loadButton() {
 	/*
 	home: (0)play  (1)setting
@@ -104,4 +103,25 @@ void Button::showButton(int page_phase) {
 		button[8].ShowBitmap();		//pausedButton at map
 	}
 
+}
+
+
+
+void Button::isClick(int num) {
+	if (num == 9 ) {
+		if (button[9].GetFrameIndexOfBitmap() == 0) {
+			button[9].SetFrameIndexOfBitmap(1);
+		}
+		else if (button[9].GetFrameIndexOfBitmap() == 1) {
+			button[9].SetFrameIndexOfBitmap(0);
+		}
+	}
+	if (num == 10) {
+		if (button[10].GetFrameIndexOfBitmap() == 0) {
+			button[10].SetFrameIndexOfBitmap(1);
+		}
+		else if (button[10].GetFrameIndexOfBitmap() == 1) {
+			button[10].SetFrameIndexOfBitmap(0);
+		}
+	}
 }
